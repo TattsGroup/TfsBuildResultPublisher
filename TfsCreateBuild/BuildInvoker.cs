@@ -1,6 +1,6 @@
-﻿using System;
-using Microsoft.TeamFoundation.Build.Client;
+﻿using Microsoft.TeamFoundation.Build.Client;
 using Microsoft.TeamFoundation.Client;
+using System;
 
 namespace TfsBuildResultPublisher
 {

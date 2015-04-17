@@ -29,5 +29,6 @@
         public string TeamCityPassword { get; set; }
         public bool TriggerBuild { get; set; }
         public bool KeepForever { get; set; }
+        public bool DontCreateBuild { get; set; }
     }
 }

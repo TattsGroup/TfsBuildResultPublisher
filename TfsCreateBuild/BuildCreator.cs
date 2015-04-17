@@ -28,19 +28,23 @@ namespace TfsBuildResultPublisher
             if (!_configurationProvider.TryProvide(args, out configuration))
                 return 1;
 
-            if (configuration.TriggerBuild)
+
+            if(configuration.DontCreateBuild == false)
             {
-                Console.WriteLine("Triggering new build of '{0}'", configuration.BuildDefinition);
-                configuration.BuildNumber = _buildInvoker.TriggerBuildAndWaitForCompletion(configuration.Collection, configuration.Project, configuration.BuildDefinition);
-            }
-            else
-            {
-                Console.WriteLine("Creating manual build '{0}'", configuration.BuildDefinition);
-                _manualBuildCreator.CreateManualBuild(
-                    configuration.BuildStatus, configuration.Collection, configuration.BuildLog, configuration.DropPath, configuration.BuildFlavor,
-                    configuration.LocalPath, configuration.BuildPlatform, configuration.BuildTarget, configuration.Project, configuration.BuildDefinition,
-                    configuration.CreateBuildDefinitionIfNotExists, configuration.BuildController, configuration.BuildNumber, configuration.ServerPath,
-                    configuration.KeepForever);
+                if (configuration.TriggerBuild)
+                {
+                    Console.WriteLine("Triggering new build of '{0}'", configuration.BuildDefinition);
+                    configuration.BuildNumber = _buildInvoker.TriggerBuildAndWaitForCompletion(configuration.Collection, configuration.Project, configuration.BuildDefinition);
+                }
+                else
+                {
+                    Console.WriteLine("Creating manual build '{0}'", configuration.BuildDefinition);
+                    _manualBuildCreator.CreateManualBuild(
+                        configuration.BuildStatus, configuration.Collection, configuration.BuildLog, configuration.DropPath, configuration.BuildFlavor,
+                        configuration.LocalPath, configuration.BuildPlatform, configuration.BuildTarget, configuration.Project, configuration.BuildDefinition,
+                        configuration.CreateBuildDefinitionIfNotExists, configuration.BuildController, configuration.BuildNumber, configuration.ServerPath,
+                        configuration.KeepForever);
+                }
             }
 
             if (!string.IsNullOrEmpty(configuration.TestResults) && File.Exists(configuration.TestResults))
@@ -53,6 +57,10 @@ namespace TfsBuildResultPublisher
                 if (!success)
                     return 1;
             }
+            else
+            {
+                Console.WriteLine("Didnt publish test results.");
+            }
 
             if (configuration.PublishTestRun)
             {
@@ -62,7 +70,7 @@ namespace TfsBuildResultPublisher
                     return 1;
             }
 
-            Console.WriteLine("Build added.");
+            Console.WriteLine("Done.");
             return 0;
         }
     }

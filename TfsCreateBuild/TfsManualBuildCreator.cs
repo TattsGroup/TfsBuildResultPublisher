@@ -1,7 +1,9 @@
-﻿using System;
-using System.Linq;
-using Microsoft.TeamFoundation.Build.Client;
+﻿using Microsoft.TeamFoundation.Build.Client;
 using Microsoft.TeamFoundation.Client;
+using System;
+using System.Linq;
+//using Microsoft.TeamFoundation.Build.Client;
+//using Microsoft.TeamFoundation.Client;
 
 namespace TfsBuildResultPublisher
 {

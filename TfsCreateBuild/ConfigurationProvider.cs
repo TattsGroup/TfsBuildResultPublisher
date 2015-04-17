@@ -45,6 +45,7 @@ namespace TfsBuildResultPublisher
                     {"testConfigid=", @"The Test Configuration to publish the results of the test run to [tcm /configId]", v => localConfiguration.TestConfigId = int.Parse(v)},
                     {"testRunTitle=", @"The title of the test run [tcm /title]", v => localConfiguration.TestRunTitle = v},
                     {"testRunResultOwner=", @"The result owner of the test run [tcm /resultOwner]", v => localConfiguration.TestRunResultOwner = v},
+                    {"dontCreateBuild", @"If you dont want to create a build and just publish results", v => localConfiguration.DontCreateBuild = (v != null) },
                 };
 
             try

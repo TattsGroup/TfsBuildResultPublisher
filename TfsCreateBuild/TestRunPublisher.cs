@@ -19,6 +19,8 @@ namespace TfsBuildResultPublisher
             if (configuration.TestConfigId == null)
                 throw new ArgumentException("/testConfigId must be specified when publishing test results");
 
+            Console.WriteLine("TestResult file:" + configuration.TestResults);
+
             string trxPath = Path.Combine(
                 Path.GetDirectoryName(configuration.TestResults),
                 Path.GetFileNameWithoutExtension(configuration.TestResults) + "_TestRunPublish.trx");
@@ -35,8 +37,8 @@ namespace TfsBuildResultPublisher
 
             var paths = new[]
                 {
-                    @"C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\TCM.exe",
-                    @"C:\Program Files\Microsoft Visual Studio 11.0\Common7\IDE\TCM.exe"
+                    @"C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\TCM.exe",
+                    @"C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\TCM.exe"
                 };
             var tcm = File.Exists(paths[0]) ? paths[0] : paths[1];
 
